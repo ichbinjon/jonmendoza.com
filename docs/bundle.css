@@ -38,11 +38,13 @@ body {
 /* unvisited link */
 a:link {
     color: #0091ff;
+    text-decoration: none; 
   }
   
   /* visited link */
   a:visited {
     color: #0091ff;
+    text-decoration: none; 
   }
   
   /* mouse over link */
@@ -53,4 +55,5 @@ a:link {
   /* selected link */
   a:active {
     color: #0091ff;
+    text-decoration: none; 
   }
