@@ -15,4 +15,4 @@ just serve
 The website is hosted on Github Pages, set up with custom domain on CloudFlare. Any pushes to the `gh-pages` branch retriggers deployment of the live website.
 
 ## ⚒️ Technologies
-- [11ty] (https://www.11ty.dev)
+- [11ty](https://www.11ty.dev) - Static Site Generator
