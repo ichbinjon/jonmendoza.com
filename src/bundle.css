@@ -1,0 +1,70 @@
+html {
+    /* min-height: -webkit-fill-available; */
+    min-height: 100%;
+    /* min-height:100vh;
+    min-height:100dvh; */
+}
+body {
+    /* min-height: -webkit-fill-available; */
+    min-height: 100%;
+    /* min-height:100vh;
+    min-height:100dvh; */
+    background: rgb(212,251,250);
+    background: linear-gradient(180deg, rgba(212,251,250,1) 0%, rgba(250,222,154,1) 100%);
+
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+.main-content {
+    max-width: 80%;
+
+    h1 {
+        font-weight: normal;
+        font-size: 2rem;
+        padding-bottom: 1rem;
+    }
+    .subsection {
+        svg {
+            width: 1rem;
+            height: 1rem;
+        }
+        font-size: 1.2rem;
+        padding-bottom: 1rem;
+    }
+}
+
+/* unvisited link */
+a:link {
+    color: #0091ff;
+    text-decoration: none; 
+  }
+  
+  /* visited link */
+  a:visited {
+    color: #0091ff;
+    text-decoration: none; 
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: #026bbd;
+  }
+  
+  /* selected link */
+  a:active {
+    color: #0091ff;
+    text-decoration: none; 
+  }
