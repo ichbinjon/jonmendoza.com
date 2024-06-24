@@ -37,13 +37,13 @@ main {
         padding-bottom: 1rem;
     }
     .subsection {
-        svg {
-            width: 1rem;
-            height: 1rem;
-        }
         font-size: 1.2rem;
         padding-bottom: 1rem;
     }
+}
+.subsection-icon {
+    width: 1rem;
+    height: 1rem;
 }
 
 /* unvisited link */
