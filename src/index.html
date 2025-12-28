@@ -99,6 +99,18 @@
           </svg>
           <span>&nbsp;London, UK</span>
         </p>
+        <div class="blog-section">
+          <h2>Writing</h2>
+          {%- for post in collections.posts reversed -%}
+          <a href="{{ post.url }}" class="blog-post">
+            <div class="blog-post-info">
+              <span class="blog-post-title">{{ post.data.title }}</span>
+              <span class="blog-post-desc">{{ post.data.description }}</span>
+            </div>
+            <time>{{ post.date | date: "%b %Y" }}</time>
+          </a>
+          {%- endfor -%}
+        </div>
       </div>
     </main>
   </body>

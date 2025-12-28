@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx @11ty/eleventy)",
+      "WebSearch",
+      "Bash(npx @11ty/eleventy --serve)",
+      "Bash(cat:*)",
+      "Skill(frontend-design:frontend-design)",
+      "Bash(git fetch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd blog section and redesign post pages\n\n- Add blog posts to home page with title, description, date\n- Remove separate blog listing page\n- Redesign post pages: cream background, Playfair Display serif font\n- Add CLAUDE.md with project instructions\nEOF\n\\)\")"
+    ]
+  }
+}
