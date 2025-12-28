@@ -26,24 +26,23 @@ main {
     justify-content: center;
     min-height: 100vh;
     min-height: 100dvh;
-  }
+}
 
+h1 {
+    font-weight: normal;
+    font-size: 2rem;
+    padding-bottom: 1rem;
+}
+.subsection {
+    font-size: 1.2rem;
+    padding-bottom: 1rem;
+}
 .main-content {
     max-width: 80%;
-
-    h1 {
-        font-weight: normal;
-        font-size: 2rem;
-        padding-bottom: 1rem;
-    }
-    .subsection {
-        svg {
-            width: 1rem;
-            height: 1rem;
-        }
-        font-size: 1.2rem;
-        padding-bottom: 1rem;
-    }
+}
+.subsection-icon {
+    width: 1rem;
+    height: 1rem;
 }
 
 /* unvisited link */
