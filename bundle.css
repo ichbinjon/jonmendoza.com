@@ -34,8 +34,9 @@ h1 {
     padding-bottom: 1rem;
 }
 .subsection {
-    font-size: 1.2rem;
-    padding-bottom: 1rem;
+    font-size: 1.1rem;
+    padding-bottom: 0.75rem;
+    line-height: 1.5;
 }
 .main-content {
     max-width: 80%;
@@ -75,6 +76,8 @@ a:link {
   background: #faf9f7;
   min-height: 100vh;
   color: #2c2c2c;
+  display: block;
+  align-items: flex-start;
 }
 
 .blog-container .post {
@@ -104,40 +107,51 @@ a:link {
 
 /* Home page blog section */
 .blog-section {
-  margin-top: 2rem;
+  margin-top: 0.75rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(0,0,0,0.15);
 }
 
 .blog-section h2 {
   font-weight: normal;
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  color: #333;
 }
 
 .blog-post {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.25rem;
   padding: 0.75rem 0;
 }
 
-.blog-post-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
 .blog-post-desc {
-  font-size: 0.9rem;
-  color: #666;
+  font-size: 0.95rem;
+  color: #555;
 }
 
-.blog-post time {
-  font-size: 0.9rem;
-  color: #666;
-  white-space: nowrap;
+.blog-post-meta {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* Site header on posts */
+.site-header {
+  max-width: 680px;
+  margin: 0 auto 2.5rem auto;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.site-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.site-name:hover {
+  color: #0066cc;
 }
 
 /* Individual post */
@@ -151,13 +165,17 @@ a:link {
   font-size: 2.4rem;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  margin: 0.75rem 0 0.75rem 0;
+  margin: 0 0 0.75rem 0;
   color: #1a1a1a;
 }
 
-.post-header time {
+.post-meta {
   font-size: 0.9rem;
   color: #777;
+}
+
+.post-meta .separator {
+  margin: 0 0.4rem;
 }
 
 .post-content {
@@ -182,4 +200,10 @@ a:link {
   padding: 0.15rem 0.4rem;
   border-radius: 3px;
   font-size: 0.9em;
+}
+
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
 }
