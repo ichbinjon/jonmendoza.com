@@ -18,7 +18,7 @@ But first, we had to fix search.
 
 Apple cares a lot about information security. Every document had access control rules. Who could see it based on their team, what NDAs they'd signed, what org they were in. You could set permissions at the space level, folder level, or individual page. Rules inherited or overrode each other. Powerful, but complicated.
 
-We used [Solr](https://solr.apache.org/) for search. To enforce access control, we had a PostFilter that ran after every query. The way PostFilters work: after the main query runs, Solr calls your filter's collect() method for every matching document. Our filter would call out to a graph database to check if the user had access to that document. If they did, pass it through. If not, skip it.
+We used <a href="https://solr.apache.org/" target="_blank">Solr</a> for search. To enforce access control, we had a PostFilter that ran after every query. The way PostFilters work: after the main query runs, Solr calls your filter's collect() method for every matching document. Our filter would call out to a graph database to check if the user had access to that document. If they did, pass it through. If not, skip it.
 
 So if your query matched 10,000 documents, we made 10,000 calls to the graph database. Even if you only wanted 25 results. Pagination didn't help either: to render page 2, you still had to filter everything before it just to know what belonged on each page.
 
