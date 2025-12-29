@@ -20,11 +20,11 @@ Apple cares a lot about information security. Every document had access control 
 
 We used [Solr](https://solr.apache.org/) for search. To enforce access control, we had a PostFilter that ran after every query. The way PostFilters work: after the main query runs, Solr calls your filter's collect() method for every matching document. Our filter would call out to a graph database to check if the user had access to that document. If they did, pass it through. If not, skip it.
 
-So if your query matched 10,000 documents, we made 10,000 calls to the graph database. Even if you only wanted 25 results.
-
-Pagination made it worse. To render page 2, you can't just check documents 26-50. You have to run the filter on everything before it to know what actually belongs on each page.
+So if your query matched 10,000 documents, we made 10,000 calls to the graph database. Even if you only wanted 25 results. Pagination didn't help either: to render page 2, you still had to filter everything before it just to know what belonged on each page.
 
 ![PostFilter flow - query matches thousands of docs, each checked against graph DB](/blog/images/postfilter-flow.png)
+
+How did we end up here? This was pre-launch, still in alpha. The team cut every corner to get something working quickly. We'd fix it later if we had to. We had to.
 
 This was blocking launch. I got assigned to fix it.
 
@@ -74,4 +74,4 @@ The wiki launched. Did exactly what it was supposed to do. Became the connective
 
 After that, things moved on the way they do. My mentor left the company. Engineers rotated to other projects. I eventually did too. The wiki kept running. It just wasn't the main thing anymore.
 
-But I'm still proud of those two weeks in 2020, staring at a 30-second query and figuring out how to make it fast.
+But I'm still proud of those two weeks in 2020. Staring at a 30-second query and making it fast.
