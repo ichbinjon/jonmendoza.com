@@ -4,6 +4,9 @@ module.exports = function(eleventyConfig){
   eleventyConfig.addPassthroughCopy("./src/blog/images");
   eleventyConfig.addPassthroughCopy("./src/robots.txt");
 
+  // Cache bust: timestamp at build time
+  eleventyConfig.addGlobalData("cacheBust", Date.now());
+
   // Read time filter (~200 words per minute)
   eleventyConfig.addFilter("readTime", function(content) {
     const words = content.split(/\s+/).length;
