@@ -17,12 +17,39 @@ Always use `just` commands. Requires `brew install just`.
 
 Static personal website using 11ty (Eleventy).
 
-- `src/` - source files (input dir)
-  - `index.html` - main page
-  - `bundle.css` - styles
-- `docs/` - built output (for GitHub Pages)
-- `favicon/` - favicon assets (copied to root via passthrough)
-- `.eleventy.js` - 11ty config
+```
+src/
+  index.html              # home page (standalone, not using base.html)
+  bundle.css              # styles
+  robots.txt              # SEO
+  sitemap.njk             # auto-generated sitemap
+  _includes/
+    base.html             # base layout (head, meta tags, etc)
+    post.html             # blog post layout (uses base.html)
+  blog/
+    posts/
+      posts.json          # sets layout + permalink for all posts
+      *.md                # blog posts
+    images/               # blog images
+docs/                     # built output (for GitHub Pages)
+favicon/                  # favicon assets
+.eleventy.js              # 11ty config
+```
+
+## Blog Posts
+
+Posts live in `src/blog/posts/*.md`. The `posts.json` sets:
+- `layout: post.html` - REQUIRED or posts render without HTML wrapper
+- `permalink: /blog/{{ page.fileSlug }}/` - URLs are /blog/<slug>/
+
+Each post needs frontmatter:
+```yaml
+---
+title: Post Title
+date: 2025-01-01
+description: Short description for SEO and home page listing.
+---
+```
 
 ## Deployment
 
@@ -32,6 +59,22 @@ Run `just deploy` to go live. This:
 3. Pushes built files to `gh-pages` branch
 
 GitHub Pages serves from `gh-pages` root. Custom domain via CloudFlare.
+
+**After deploy, verify locally:**
+```bash
+head -20 docs/blog/<post-slug>/index.html  # should have <!DOCTYPE html>
+```
+
+## Cache Busting
+
+CSS uses `?v={{ cacheBust }}` which is a timestamp set at build time in `.eleventy.js`. No manual version bumping needed.
+
+## Writing Style
+
+Avoid AI-sounding patterns:
+- No em dashes (—), use periods or commas
+- No "figuring", "straightforward", "comprehensive"
+- Keep it conversational and direct
 
 ## Removing Gemini Watermarks
 
