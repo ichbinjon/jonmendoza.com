@@ -65,9 +65,9 @@
 <h2>Why it was slow</h2>
 <p>Apple cares a lot about information security. Every document had access control rules. Who could see it based on their team, what NDAs they'd signed, what org they were in. You could set permissions at the space level, folder level, or individual page. Rules inherited or overrode each other. Powerful, but complicated.</p>
 <p>We used <a href="https://solr.apache.org/">Solr</a> for search. To enforce access control, we had a PostFilter that ran after every query. The way PostFilters work: after the main query runs, Solr calls your filter's collect() method for every matching document. Our filter would call out to a graph database to check if the user had access to that document. If they did, pass it through. If not, skip it.</p>
-<p>So if your query matched 10,000 documents, we made 10,000 calls to the graph database. Even if you only wanted 25 results.</p>
-<p>Pagination made it worse. To render page 2, you can't just check documents 26-50. You have to run the filter on everything before it to know what actually belongs on each page.</p>
+<p>So if your query matched 10,000 documents, we made 10,000 calls to the graph database. Even if you only wanted 25 results. Pagination didn't help either: to render page 2, you still had to filter everything before it just to know what belonged on each page.</p>
 <p><img src="/blog/images/postfilter-flow.png" alt="PostFilter flow - query matches thousands of docs, each checked against graph DB"></p>
+<p>How did we end up here? This was pre-launch, still in alpha. The team cut every corner to get something working quickly. We'd fix it later if we had to. We had to.</p>
 <p>This was blocking launch. I got assigned to fix it.</p>
 <h2>The fix</h2>
 <p>I didn't have some genius insight. I just looked at it long enough that the obvious answer became obvious: stop checking permissions after you find documents. Make permissions part of how you find documents.</p>
@@ -92,7 +92,7 @@
 <h2>What happened after</h2>
 <p>The wiki launched. Did exactly what it was supposed to do. Became the connective tissue for documentation across Apple.</p>
 <p>After that, things moved on the way they do. My mentor left the company. Engineers rotated to other projects. I eventually did too. The wiki kept running. It just wasn't the main thing anymore.</p>
-<p>But I'm still proud of those two weeks in 2020, staring at a 30-second query and figuring out how to make it fast.</p>
+<p>But I'm still proud of those two weeks in 2020. Staring at a 30-second query and making it fast.</p>
 
     </div>
   </article>
