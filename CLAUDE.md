@@ -5,12 +5,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-just install   # install dependencies (npm install)
-just build     # build site (npx @11ty/eleventy)
-just serve     # dev server with hot reload (npx @11ty/eleventy --serve)
+just install   # install dependencies
+just serve     # dev server with hot reload (localhost:8080)
+just build     # build site to docs/
+just deploy    # build + commit + push to main and gh-pages
 ```
 
-Requires `just` command runner (`brew install just`).
+Always use `just` commands. Requires `brew install just`.
 
 ## Architecture
 
@@ -25,7 +26,12 @@ Static personal website using 11ty (Eleventy).
 
 ## Deployment
 
-Hosted on GitHub Pages via `gh-pages` branch with CloudFlare custom domain.
+Run `just deploy` to go live. This:
+1. Builds site to `docs/`
+2. Commits and pushes to `main`
+3. Pushes built files to `gh-pages` branch
+
+GitHub Pages serves from `gh-pages` root. Custom domain via CloudFlare.
 
 ## Browser Verification
 
