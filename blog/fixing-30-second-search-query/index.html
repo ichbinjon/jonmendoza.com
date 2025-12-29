@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/bundle.css?v=1766969405255" />
+    <link rel="stylesheet" href="/bundle.css?v=1766968523978" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -64,7 +64,7 @@
 <p>But first, we had to fix search.</p>
 <h2>Why it was slow</h2>
 <p>Apple cares a lot about information security. Every document had access control rules. Who could see it based on their team, what NDAs they'd signed, what org they were in. You could set permissions at the space level, folder level, or individual page. Rules inherited or overrode each other. Powerful, but complicated.</p>
-<p>We used <a href="https://solr.apache.org/">Solr</a> for search. To enforce access control, we had a PostFilter that ran after every query. The way PostFilters work: after the main query runs, Solr calls your filter's collect() method for every matching document. Our filter would call out to a graph database to check if the user had access to that document. If they did, pass it through. If not, skip it.</p>
+<p>We used <a href="https://solr.apache.org/" target="_blank">Solr</a> for search. To enforce access control, we had a PostFilter that ran after every query. The way PostFilters work: after the main query runs, Solr calls your filter's collect() method for every matching document. Our filter would call out to a graph database to check if the user had access to that document. If they did, pass it through. If not, skip it.</p>
 <p>So if your query matched 10,000 documents, we made 10,000 calls to the graph database. Even if you only wanted 25 results. Pagination didn't help either: to render page 2, you still had to filter everything before it just to know what belonged on each page.</p>
 <p><img src="/blog/images/postfilter-flow.png" alt="PostFilter flow - query matches thousands of docs, each checked against graph DB"></p>
 <p>How did we end up here? This was pre-launch, still in alpha. The team cut every corner to get something working quickly. We'd fix it later if we had to. We had to.</p>
