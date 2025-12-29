@@ -38,7 +38,7 @@ So I indexed every document with its access control rules baked in. User IDs, gr
 
 The idea was simple. Actually doing it was harder.
 
-I was a new grad proposing a complete rearchitecture of how we indexed pages into search. This wasn't a tweak. It was rethinking the whole approach, and I was going to do it mostly on my own. The stakes were high. At Apple, an access control incident isn't just a bug, it's a serious data privacy issue. If someone saw a document they weren't supposed to, even for a second, that's bad. Really bad.
+I was a new grad proposing a complete rearchitecture of how we indexed pages into search. This wasn't a tweak. It was rethinking the whole approach, and I was going to do it mostly on my own. The stakes were high. At Apple, an access control incident isn't just a bug, it's a serious issue. Like, really bad.
 
 So I had to get it right.
 
@@ -64,7 +64,7 @@ I added telemetry to track the indexing lag. It stayed in the low seconds.
 
 First time I ran a query after flipping this on: under a second.
 
-I didn't trust it. Ran it again. Pulled up a few documents from the results to make sure they were actually documents I should have access to. Half expecting to find something leaked from a team I'd never heard of. Everything checked out. It was actually working.
+I didn't trust it. Ran it again. Pulled up a few documents from the results to verify access controls were working correctly. Everything checked out. It was actually working.
 
 30 seconds down to under one.
 
