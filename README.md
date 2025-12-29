@@ -12,7 +12,17 @@ just serve
 
 ## ☁️ Deploying
 
-The website is hosted on Github Pages, set up with custom domain on CloudFlare. Any pushes to the `gh-pages` branch retriggers deployment of the live website.
+```
+just deploy
+```
+
+This builds the site to `docs/`, commits, and pushes to both `main` and `gh-pages`.
+
+**How it works:**
+- Site is built by 11ty into `docs/`
+- `gh-pages` branch contains only the built files (extracted from `docs/`)
+- GitHub Pages serves from `gh-pages` branch root
+- Custom domain via CloudFlare
 
 ## ⚒️ Technologies
 - [11ty](https://www.11ty.dev) - Static Site Generator
