@@ -13,6 +13,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#d4faf5">
+    <meta name="description" content="{{ description | default: 'Jonathan Mendoza - Software Engineer. Founding Engineer at Granola, prev Apple.' }}">
+    <link rel="canonical" href="https://jonmendoza.com{{ page.url }}">
 
     <meta property="og:title" content="{{ title }} - Jonathan Mendoza">
     <meta property="og:type" content="{% if layout == 'post.html' %}article{% else %}website{% endif %}">
@@ -21,6 +23,24 @@
     <meta property="og:description" content="{{ description | default: 'Jonathan Mendoza\'s personal site and blog' }}">
     <meta property="og:site_name" content="Jonathan Mendoza">
     <meta property="og:locale" content="en_US">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Jon_Mendoza_">
+    <meta name="twitter:title" content="{{ title }} - Jonathan Mendoza">
+    <meta name="twitter:description" content="{{ description | default: 'Jonathan Mendoza - Software Engineer' }}">
+
+    {% if layout == 'post.html' %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "{{ title }}",
+      "author": { "@type": "Person", "name": "Jonathan Mendoza" },
+      "datePublished": "{{ date | date: '%Y-%m-%d' }}",
+      "description": "{{ description }}"
+    }
+    </script>
+    {% endif %}
   </head>
   <body>
     {{ content }}

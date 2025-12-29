@@ -10,6 +10,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#d4faf5">
+    <meta name="description" content="Jonathan Mendoza - Software Engineer. Founding Engineer at Granola, prev Apple.">
+    <link rel="canonical" href="https://jonmendoza.com/">
 
     <meta property="og:title" content="Jonathan Mendoza's Personal Site">
     <meta property="og:type" content="website">
@@ -19,6 +21,26 @@
     <meta property="og:site_name" content="Jonathan Mendoza">
     <meta property="og:locale" content="en_US">
 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Jon_Mendoza_">
+    <meta name="twitter:title" content="Jonathan Mendoza">
+    <meta name="twitter:description" content="Software Engineer. Founding Engineer at Granola, prev Apple.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jonathan Mendoza",
+      "url": "https://jonmendoza.com",
+      "jobTitle": "Founding Engineer",
+      "worksFor": { "@type": "Organization", "name": "Granola" },
+      "sameAs": [
+        "https://github.com/ichbinjon",
+        "https://linkedin.com/in/jpgmendoza",
+        "https://x.com/Jon_Mendoza_"
+      ]
+    }
+    </script>
   </head>
   <body>
     <main class="container">
@@ -105,11 +127,9 @@
           <h2>Writing</h2>
           {%- for post in collections.posts reversed -%}
           <a href="{{ post.url }}" class="blog-post">
-            <div class="blog-post-info">
-              <span class="blog-post-title">{{ post.data.title }}</span>
-              <span class="blog-post-desc">{{ post.data.description }}</span>
-            </div>
-            <time>{{ post.date | date: "%b %Y" }}</time>
+            <span class="blog-post-title">{{ post.data.title }}</span>
+            <span class="blog-post-desc">{{ post.data.description }}</span>
+            <span class="blog-post-meta">{{ post.date | date: "%b %Y" }} · {{ post.templateContent | readTime }}</span>
           </a>
           {%- endfor -%}
         </div>

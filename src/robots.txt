@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jonmendoza.com/sitemap.xml

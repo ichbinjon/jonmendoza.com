@@ -18,13 +18,13 @@ But first, we had to fix search.
 
 Apple cares a lot about information security. Every document had access control rules. Who could see it based on their team, what NDAs they'd signed, what org they were in. You could set permissions at the space level, folder level, or individual page. Rules inherited or overrode each other. Powerful, but complicated.
 
-We used Solr for search. It's an open-source search engine, pretty standard for this kind of thing. To enforce access control, we had a PostFilter that ran after every query. The way PostFilters work: after the main query runs, Solr calls your filter's collect() method for every matching document. Our filter would call out to a graph database to check if the user had access to that document. If they did, pass it through. If not, skip it.
+We used [Solr](https://solr.apache.org/) for search. To enforce access control, we had a PostFilter that ran after every query. The way PostFilters work: after the main query runs, Solr calls your filter's collect() method for every matching document. Our filter would call out to a graph database to check if the user had access to that document. If they did, pass it through. If not, skip it.
 
 So if your query matched 10,000 documents, we made 10,000 calls to the graph database. Even if you only wanted 25 results.
 
 Pagination made it worse. To render page 2, you can't just check documents 26-50. You have to run the filter on everything before it to know what actually belongs on each page.
 
-<!-- TODO: Diagram showing the PostFilter flow: query matches 10,000 docs → collect() called 10,000 times → each one hits graph DB → finally get 25 results. Show the disproportion. -->
+![PostFilter flow - query matches thousands of docs, each checked against graph DB](/blog/images/postfilter-flow.png)
 
 This was blocking launch. I got assigned to fix it.
 
@@ -34,7 +34,7 @@ I didn't have some genius insight. I just looked at it long enough that the obvi
 
 So I indexed every document with its access control rules baked in. User IDs, group IDs, NDA IDs. All flattened into fields in Solr. When someone searches, their permissions are just another filter in the query. One call, no external lookups.
 
-<!-- TODO: Diagram showing the new search flow: user query + user's permissions → Solr → results. Clean, single step. -->
+![New search flow - permissions indexed with docs, single query](/blog/images/new-search-flow.png)
 
 The idea was simple. Actually doing it was harder.
 
@@ -46,7 +46,7 @@ The tricky part is keeping the index up to date. ACLs change all the time. Someo
 
 So I set up an event-driven system. Whenever a page's ACL changed, it published an event to a queue. A worker would pick up that event, look up the current state of the document's permissions, flatten them into the list of user IDs, group IDs, and NDA IDs that should have access, and push an update to Solr.
 
-<!-- TODO: Diagram of the event-driven indexing: ACL change → event queue → worker → Solr update. Simple pipeline. -->
+![Event-driven indexing pipeline](/blog/images/event-pipeline.png)
 
 Took about two weeks to build. This was pre-LLMs, so it was just me reading Solr documentation and thinking hard.
 
@@ -58,7 +58,7 @@ If someone loses access to a doc, they might still see it in search results for 
 
 I added telemetry to track the indexing lag. It stayed in the low seconds.
 
-<!-- TODO: A simple chart or gauge showing indexing lag staying under a few seconds. Maybe a dashboard screenshot aesthetic. -->
+![Indexing lag chart - stays well under alert threshold](/blog/images/indexing-lag.png)
 
 ## The result
 
@@ -67,8 +67,6 @@ First time I ran a query after flipping this on: under a second.
 I didn't trust it. Ran it again. Pulled up a few documents from the results to make sure they were actually documents I should have access to. Half expecting to find something leaked from a team I'd never heard of. Everything checked out. It was actually working.
 
 30 seconds down to under one.
-
-<!-- TODO: Before/after comparison: two search bars, one with a spinner and '30s', one with results and '<1s'. Keep it simple. -->
 
 ## What happened after
 
