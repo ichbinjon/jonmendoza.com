@@ -53,28 +53,24 @@ description: Short description for SEO and home page listing.
 
 ## Deployment
 
-Run `just deploy` to go live. This:
-1. Builds site to `docs/`
-2. Commits and pushes to `main`
-3. Pushes built files to `gh-pages` branch
-
-GitHub Pages serves from `gh-pages` root. Custom domain via CloudFlare.
-
-**After deploy, verify locally:**
+**Before deploying, verify locally:**
 ```bash
+just build
 head -20 docs/blog/<post-slug>/index.html  # should have <!DOCTYPE html>
 ```
+
+Then deploy:
+```bash
+just deploy
+```
+
+This builds, commits, pushes to `main`, and pushes built files to `gh-pages`.
+
+GitHub Pages serves from `gh-pages` root. Custom domain via CloudFlare.
 
 ## Cache Busting
 
 CSS uses `?v={{ cacheBust }}` which is a timestamp set at build time in `.eleventy.js`. No manual version bumping needed.
-
-## Writing Style
-
-Avoid AI-sounding patterns:
-- No em dashes (—), use periods or commas
-- No "figuring", "straightforward", "comprehensive"
-- Keep it conversational and direct
 
 ## Removing Gemini Watermarks
 
