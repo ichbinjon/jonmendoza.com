@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/bundle.css" />
+    <link rel="stylesheet" href="/bundle.css?v=1766968523978" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -74,7 +74,7 @@
 <p>So I indexed every document with its access control rules baked in. User IDs, group IDs, NDA IDs. All flattened into fields in Solr. When someone searches, their permissions are just another filter in the query. One call, no external lookups.</p>
 <p><img src="/blog/images/new-search-flow.png" alt="New search flow - permissions indexed with docs, single query"></p>
 <p>The idea was simple. Actually doing it was harder.</p>
-<p>I was a new grad proposing a complete rearchitecture of how we indexed pages into search. This wasn't a tweak. It was rethinking the whole approach, and I was going to do it mostly on my own. The stakes were high. At Apple, an access control incident isn't just a bug, it's a serious data privacy issue. If someone saw a document they weren't supposed to, even for a second, that's bad. Really bad.</p>
+<p>I was a new grad proposing a complete rearchitecture of how we indexed pages into search. This wasn't a tweak. It was rethinking the whole approach, and I was going to do it mostly on my own. The stakes were high. At Apple, an access control incident isn't just a bug, it's a serious issue. Like, really bad.</p>
 <p>So I had to get it right.</p>
 <p>The tricky part is keeping the index up to date. ACLs change all the time. Someone gets added to a folder, someone leaves a team, an NDA expires. You can't just index once and forget about it.</p>
 <p>So I set up an event-driven system. Whenever a page's ACL changed, it published an event to a queue. A worker would pick up that event, look up the current state of the document's permissions, flatten them into the list of user IDs, group IDs, and NDA IDs that should have access, and push an update to Solr.</p>
@@ -87,7 +87,7 @@
 <p><img src="/blog/images/indexing-lag.png" alt="Indexing lag chart - stays well under alert threshold"></p>
 <h2>The result</h2>
 <p>First time I ran a query after flipping this on: under a second.</p>
-<p>I didn't trust it. Ran it again. Pulled up a few documents from the results to make sure they were actually documents I should have access to. Half expecting to find something leaked from a team I'd never heard of. Everything checked out. It was actually working.</p>
+<p>I didn't trust it. Ran it again. Pulled up a few documents from the results to verify access controls were working correctly. Everything checked out. It was actually working.</p>
 <p>30 seconds down to under one.</p>
 <h2>What happened after</h2>
 <p>The wiki launched. Did exactly what it was supposed to do. Became the connective tissue for documentation across Apple.</p>
