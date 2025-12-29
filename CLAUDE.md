@@ -38,13 +38,7 @@ GitHub Pages serves from `gh-pages` root. Custom domain via CloudFlare.
 If using Gemini to generate images, remove watermarks with:
 
 ```bash
-# Download tool (one-time)
-curl -L -o /tmp/GeminiWatermarkTool.zip "https://github.com/allenk/GeminiWatermarkTool/releases/download/v0.1.2/GeminiWatermarkTool-macOS-Universal.zip"
-unzip -o /tmp/GeminiWatermarkTool.zip -d /tmp/
-chmod +x /tmp/GeminiWatermarkTool
-
-# Remove watermarks from images
-/tmp/GeminiWatermarkTool -i src/blog/images/ -o src/blog/images/ -v
+~/bin/GeminiWatermarkTool -i src/blog/images/ -o src/blog/images/ -v
 ```
 
 ## Browser Verification
